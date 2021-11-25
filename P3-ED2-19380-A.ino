@@ -93,4 +93,42 @@ void setup()
 //**********************************************************************************************************************
 // Fuinciones
 //**********************************************************************************************************************
+void BPMYSPO2(void)
+{
+  if (Serial2.available() > 0) // Condición que permite verficar si hay bytes disponibles en el buffer de registro.
+  {
+    estadoBoton = Serial2.readStringUntil('\n'); //Lectura de la instrucción enviada por la Tiva C.
+    estado = estadoBoton.toInt(); //Conversión  de la instrcción a un entero.
+    Serial.print("Estado: ");
+    Serial.print(estado);
+  }
+
+  if ((estado) == 1) // Condición que al identificar la instrucción de la Tiva C envía el ultimo valor leido por el sensor de BPM y SPO2.
+  {
+    Serial.println(" Se ha leido el valor con exito: ");
+    Serial.print("BPM:");
+    Serial.print(heartRate);
+    Serial.print(" / ");
+    Serial.print("SPO2:");
+    Serial.println(spo2);
+    Serial2.print("BPM:");
+    Serial2.print(heartRate);
+    Serial2.print(" / ");
+    Serial2.print("SPO2:");
+    Serial2.println(spo2);
+    Neopixel1(); //Se llama a la función que permitira enceder el neopixel al enviar un valor del sensor. 
+    // El utlimo valor de BPM es enviado por el módulo UART 2 a la Tiva C.
+    estado = 0; //Se hace cero el estado para que se envie solo se envíe un valor de BPM y SPO2 por cada instrucción enviada por la Tiva C.
+  }
+  if (estado == 2) { //Condición que verifica que se está gurdando un dato en la memoria SD. 
+    Serial.println(" Se ha guardado el valor con exito: ");
+    Neopixel2(); //Se llama a la función que permitira enceder el neopixel al enviar un valor del sensor. 
+    estado = 0; //Se hace cero el estado para que se envie solo se envíe un valor de BPM y SPO2 por cada instrucción enviada por la Tiva C.
+  }
+  if (estado == 0) { //Condición que evalua que no se está enviando una intrucción por parte de la Tiva c. 
+    Serial.println();
+    Neopixel3(); //Se llama a la función que permitira enceder el neopixel al enviar un valor del sensor. 
+    
+  }
+}
 }
