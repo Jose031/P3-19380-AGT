@@ -20,9 +20,16 @@ MAX30105 particleSensor;
 //**********************************************************************************************************************
 // Defincion de Pines y otros
 //**********************************************************************************************************************
+#define PIN  25 // Pin a la cual se conectara el Neopixel 
+#define NUMPIXELS  8 //Numero de leds que cuenta el Neopixel 
 //**********************************************************************************************************************
 // Prototipo de Funciones
 //**********************************************************************************************************************
+void BPMYSPO2(void); // Prototipo de función encargada de enviar el valor BPM y SPO2 a la tiva C mediante comunicación USART.
+void leerSensor(void); // Prototipo de función encargada de leer el valor BPM y SPO2 del sensor.
+void Neopixel1(void); //Prototipo de funcion que se encarga de encender el neopixel cuando se manda a leer un dato.
+void Neopixel2(void); //Prototipo de funcion que se encarga de encender el neopixel cuando se guarda un dato en la SD.
+void Neopixel3(void); //Prototipo de funcion que se encarga de encender el neopixel cuando no se guarde ni se envíe ningun dato
 //**********************************************************************************************************************
 // Variables Globales
 //**********************************************************************************************************************
