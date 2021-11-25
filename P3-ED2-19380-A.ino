@@ -178,4 +178,27 @@ void leerSensor() // Función encargada de leer los valores del sensor.
   maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
 }
 void Neopixel1(void) {
+  for (int i = 0; i < NUMPIXELS; i++) { //Ciclo que permite pintar los leds del Neopixel con una secuencia. 
+    pixels.setPixelColor(i, pixels.Color(255, 0, 0));// Se establece el pin a pintar, y el color que se le quiere dar RGB.
+    pixels.show(); // Mostrar los la instrucción del pixels.setPixelColor en el NeoPixel.
+    delay(250);
+  }
+}
+
+void Neopixel2(void) {
+
+  for (int a = 0; a < NUMPIXELS; a++) { //Ciclo que permite pintar los leds del Neopixel con una secuencia.
+    pixels.setPixelColor(a, pixels.Color(0, 0, 255)); // Se establece el pin a pintar, y el color que se le quiere dar RGB.
+    pixels.show(); // Mostrar los la instrucción del pixels.setPixelColor en el NeoPixel.
+    delay(250);
+  }
+}
+void Neopixel3(void){
+  pixels.clear(); //Limpiar los leds del Neopixel 
+  pixels.setPixelColor(3, pixels.Color(0, 200, 0));// Se establece el pin a pintar, y el color que se le quiere dar RGB.
+  pixels.setPixelColor(5, pixels.Color(0, 200, 0));
+  pixels.setPixelColor(0, pixels.Color(0, 200, 0));
+  pixels.setPixelColor(1, pixels.Color(0, 200, 0));
+  pixels.setPixelColor(7, pixels.Color(0, 200, 0));
+  pixels.show();
 }
